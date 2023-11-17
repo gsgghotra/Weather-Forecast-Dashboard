@@ -8,17 +8,6 @@ console.log(formattedDate);
 var todayEl = document.getElementById('todayDate');
 todayEl.innerText = formattedDate;
 
-
-//Variable for saving the saerch
-let searchVal;
-//link generator
-
-
-//Location finder
-function locationFinder(){
-
-}
-
 //Plan
 
 

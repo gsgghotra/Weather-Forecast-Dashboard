@@ -1,6 +1,6 @@
 //Search bar border focus
 var search=document.getElementById('search-input');
-
+let API_KEY = '';
 //On focus
 search.addEventListener('focus',(event)=>{
     document.getElementById('search-form').style.border="1px solid #E01A59";
@@ -11,7 +11,10 @@ search.addEventListener('focusout',(event)=>{
     document.getElementById('search-form').style.border="1px solid rgba(0, 0, 0, 0.276)";
 });
 
-//Auto complete
+//Variable for saving the saerch
+let searchVal;
+
+//Auto complete using jQuery with dynamic array
 var locations = [];
 $( "#search-input" ).autocomplete({
 source: function( request, response ) {
@@ -22,9 +25,21 @@ source: function( request, response ) {
     }
 });
 
-//Auto complete Array generator
+//Search the location and update the auto complete array on each key up
+$('#search-input').on("keyup", function(event){
+    searchVal = $('#search-input').val();
+    //if search exists and is greater than 3 characters
+    if (searchVal.length > 2){
+        console.log(searchVal);
+        //pass the searched characters to the location finder function
+        autoCompleteGenerator(searchVal)
+    }
+    
+});
+
+//Auto complete Array generator and update search suggestion
 function autoCompleteGenerator(searchVal){
-    var url =  "http://api.openweathermap.org/geo/1.0/direct?q="+searchVal+"&limit=5&appid=";
+    var url =  "http://api.openweathermap.org/geo/1.0/direct?q="+searchVal+"&limit=5&appid="+API_KEY;
         fetch(url)
         .then(function(response){
             //console.log(response);
@@ -37,18 +52,18 @@ function autoCompleteGenerator(searchVal){
                 var newLocation = data[i].name+","+ [data[i].country];
                 locations[i] = newLocation;
                 //console.log(locations)
-            }
-        })
-    }
+        }
+    })
+}
 
-//Search the location and update the auto complete on each key up
-$('#search-input').on("keyup", function(event){
+//Search Button
+$('#search-button').on('click', (event)=>{
     event.preventDefault();
+    //console.log(event);
     searchVal = $('#search-input').val();
-    //if search exists
-    if (searchVal.length > 2){
-        console.log(searchVal);
-        autoCompleteGenerator(searchVal)
-    }
     
-});
+    //add saerched Location the screen
+    let searchedLocation = document.getElementById('searchedLocation');
+    searchedLocation.innerText = searchVal;
+
+})
