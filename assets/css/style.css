@@ -54,12 +54,12 @@ body{
     max-width: 400px;
     box-shadow: 2px 1px 5px 1px rgba(0, 0, 0, 0.273);
 }
-#search{
+#search-input{
     border:none;
     width:350px;
     font-size: 15px;
 }
-#search:focus{
+#search-input:focus{
     outline: none;
 }
 .search-icon{
