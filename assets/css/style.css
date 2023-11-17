@@ -28,6 +28,9 @@ body{
     background-color: var(--primary-color) !important;
     color: white !important;
 }
+.nav-item{
+    padding-right: 15px;
+}
 /* Search bar */
 
 .search {
