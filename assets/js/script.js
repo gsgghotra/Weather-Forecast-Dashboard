@@ -5,7 +5,7 @@ var formattedDate = dayjs(timeNow).format('dddd, MMMM D');
 console.log(formattedDate);
 
 //Append the time to the page
-var todayEl = document.getElementById('today');
+var todayEl = document.getElementById('todayDate');
 todayEl.innerText = formattedDate;
 
 

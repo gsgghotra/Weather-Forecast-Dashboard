@@ -22,10 +22,6 @@
   <!-- max-width for ultra wide resolutions -->
   <div class="container-fluid main" style="max-width: 1200px">
     <div class="row search">
-      <h2 id="form-heading" class="mt-1 h3 form-label">
-        Search for a City:
-      </h2>
-
       <!-- Search Box -->
       <form id="search-form" class="form">
         <i class="search-icon fas fa-search"></i>
@@ -38,11 +34,15 @@
     </div>
 
     <div class="row currentLocation">
-      <aside class="col-lg-3 pb-3">
-
+      <aside class="col-lg-5 pb-3 text-center currentWeather">
         <!-- Current Location -->
+        <h2>London</h2>
+        <section id="todayDate"></section>
+        <section id="weatherStatus">
+          <p>Rain</p>
+        </section>
       </aside>
-      <div class="col-lg-9 pb-3">
+      <div class="col-lg-7 pb-3">
         <section id="today" class="mt-3" role="region" aria-live="polite"></section>
         <section id="forecast" class="row mt-3" role="region" aria-live="polite"></section>
       </div>
