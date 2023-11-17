@@ -40,6 +40,13 @@ body{
     width:350px;
     font-size: 15px;
 }
+#search:focus{
+    outline: none;
+}
+.search-icon{
+    margin: 10px;
+    color:rgba(0, 0, 0, 0.564);
+}
 
 #search-button{
     border:none;
