@@ -9,18 +9,10 @@ var todayEl = document.getElementById('todayDate');
 todayEl.innerText = formattedDate;
 
 
+//Variable for saving the saerch
+let searchVal;
 //link generator
-function linkGenerator(){
-var url =  "https://api.openweathermap.org/data/2.5/weather?q=London,Burundi&appid=";
-    fetch(url)
-    .then(function(response){
-        console.log(response);
-        return response.json();
-    })
-    .then(function(data){
-        console.log(data);
-    })
-}
+
 
 //Location finder
 function locationFinder(){
@@ -28,10 +20,7 @@ function locationFinder(){
 }
 
 //Plan
-//Search the location
-$('#search-button').on("click", function(event){
-    event.preventDefault();
-    console.log('Button Clicked');
-});
 
-//The location will 
+
+//The location will be used to get lon and lat cordinates
+
