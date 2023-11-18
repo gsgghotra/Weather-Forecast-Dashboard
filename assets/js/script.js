@@ -1,9 +1,9 @@
 //Today's Date 
 var timeNow = dayjs();
 var formattedDate = dayjs(timeNow).format('dddd, MMMM D');
-
 console.log(formattedDate);
 
+var API = "";
 //Append the time to the page
 var todayEl = document.getElementById('todayDate');
 todayEl.innerText = formattedDate;
@@ -13,27 +13,49 @@ todayEl.innerText = formattedDate;
 
 function urlGenerator (cityName, latitude, longitude){
     //Generate the url for weather fetch
-    let baseURL = "https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}";
+    let baseURL = "https://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+longitude+"&appid="+API;
+    return baseURL;
 }
+let queryURL = urlGenerator('London', 51.509865, -0.118092);
+fetchWeather(queryURL)
 
-function fetchWeather(){
-    fetch()
+function fetchWeather(queryURL){
+    fetch(queryURL)
     .then(function(response){
         //Response
+        return response.json();
     })
     .then(function(data){
-        //Display Weather
+        //Display Weather data
+        console.log(data);
+
+        //Information structure using ES6+ object destructuring
+        ({name, weather, main, wind} = data);
+
+        displayWeather(name, weather, main, wind);
     })
 }
 
-function displayWeather(cityName, latitude, longitude){
+function displayWeather(cityName, weather, main, wind){
     console.log(cityName)
+    //console.log(weather)
+    //Display City Name
     let searchedLocation = document.getElementById('searchedLocation');
     searchedLocation.innerText = cityName;
+
+    //Display Current Weather condition
+    let currentWeather = document.getElementById('currentWeather');
+    currentWeather.innerHTML = weather[0].main;
+
+    //Add temprature, wind and humidity to the app
+    let tempratureEl = document.getElementById('temprature');
+    tempratureEl.innerText = "Temp: " + main.temp;
+    let humidityEl = document.getElementById('humidity');
+    humidityEl.innerText = "Humidity: " + main.humidity;
+    let windEl = document.getElementById('wind');
+    windEl.innerText = "Speed: " + wind.speed;
+
 }
-
-
-urlGenerator('London City', 51.509865, -0.118092);
 
 
 //Planning
