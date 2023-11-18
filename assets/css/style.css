@@ -75,6 +75,14 @@ body{
     padding:0px 15px;
 }
 
+.ui-autocomplete{
+    border-radius: 0px 0px 5px 5px;
+}
+.ui-menu-item{
+    font-size: 90%;
+}
+
+
 /* Weather  */
 
 .currentWeather{
