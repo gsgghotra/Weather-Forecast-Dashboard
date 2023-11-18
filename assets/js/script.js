@@ -49,11 +49,11 @@ function displayWeather(cityName, weather, main, wind){
 
     //Add temprature, wind and humidity to the app
     let tempratureEl = document.getElementById('temprature');
-    tempratureEl.innerText = "Temp: " + main.temp + " °C";
+    tempratureEl.innerText = "Temp: " + Math.ceil(main.temp) + " °C";
     let humidityEl = document.getElementById('humidity');
-    humidityEl.innerText = "Humidity: " + main.humidity;
+    humidityEl.innerText = "Humidity: " + main.humidity+"%";
     let windEl = document.getElementById('wind');
-    windEl.innerText = "Speed: " + wind.speed;
+    windEl.innerText = "Speed: " + Math.round(wind.speed * 3.6)+ " KPH";
 
 }
 
