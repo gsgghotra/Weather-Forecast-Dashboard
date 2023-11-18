@@ -13,7 +13,7 @@ todayEl.innerText = formattedDate;
 
 function urlGenerator (cityName, latitude, longitude){
     //Generate the url for weather fetch
-    let baseURL = "https://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+longitude+"&appid="+API;
+    let baseURL = "https://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+longitude+"&units=metric&appid="+API;
     return baseURL;
 }
 let queryURL = urlGenerator('London', 51.509865, -0.118092);
@@ -49,7 +49,7 @@ function displayWeather(cityName, weather, main, wind){
 
     //Add temprature, wind and humidity to the app
     let tempratureEl = document.getElementById('temprature');
-    tempratureEl.innerText = "Temp: " + main.temp;
+    tempratureEl.innerText = "Temp: " + main.temp + " °C";
     let humidityEl = document.getElementById('humidity');
     humidityEl.innerText = "Humidity: " + main.humidity;
     let windEl = document.getElementById('wind');
