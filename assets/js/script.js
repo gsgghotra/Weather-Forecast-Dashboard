@@ -51,14 +51,33 @@ function fetchForecasting(queryURL){
     })
     .then(function(data){
         console.log(data);
-
+        const today = parseInt(dayjs().format('DD')); //Save it as a number
+        for(let i = 0; i < data.cnt; i++){
+            let date = parseInt(dayjs(data.list[i].dt_txt).format('DD')); //Save it as a number
+        
         //Grab the dt which is date timestamp
 
         //check if that date is today + 1
+        if(date-1 === today){
+            $('#dayOne').text(dayjs(data.list[i].dt_txt).format('DD/MM/YYYY'))
+        }
+        else if(date-2 === today){
+            $('#dayTwo').text(dayjs(data.list[i].dt_txt).format('DD/MM/YYYY'))
+        }
+        else if(date-3 === today){
+            $('#dayThree').text(dayjs(data.list[i].dt_txt).format('DD/MM/YYYY'))
+        }
+        else if(date-4 === today){
+            $('#dayFour').text(dayjs(data.list[i].dt_txt).format('DD/MM/YYYY'))
+        }
+        else if(date-5 === today){
+            $('#dayFive').text(dayjs(data.list[i].dt_txt).format('DD/MM/YYYY'))
+        }
 
         //Maybe find the average temp for that day
 
         //
+        }
     })
 }
 //Display the weather
