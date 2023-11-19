@@ -54,6 +54,7 @@ function displayWeather(cityName, weather, main, wind){
     humidityEl.innerText = "Humidity: " + main.humidity+"%";
     let windEl = document.getElementById('wind');
     windEl.innerText = "Speed: " + Math.round(wind.speed * 3.6)+ " KPH";
+    $("#weather_image").attr("src", "http://openweathermap.org/img/w/" + weather[0].icon + ".png");
 
 }
 
