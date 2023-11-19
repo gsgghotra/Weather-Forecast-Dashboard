@@ -51,7 +51,10 @@ function fetchForecasting(queryURL){
     })
     .then(function(data){
         console.log(data);
+
         const today = parseInt(dayjs().format('DD')); //Save it as a number
+        let forecastingDay;
+
         for(let i = 0; i < data.cnt; i++){
             let date = parseInt(dayjs(data.list[i].dt_txt).format('DD')); //Save it as a number
         
@@ -59,20 +62,24 @@ function fetchForecasting(queryURL){
 
         //check if that date is today + 1
         if(date-1 === today){
-            $('#dayOne').text(dayjs(data.list[i].dt_txt).format('DD/MM/YYYY'))
+            forecastingDay = '#dayOne';
         }
         else if(date-2 === today){
-            $('#dayTwo').text(dayjs(data.list[i].dt_txt).format('DD/MM/YYYY'))
+            forecastingDay = '#dayTwo';
         }
         else if(date-3 === today){
-            $('#dayThree').text(dayjs(data.list[i].dt_txt).format('DD/MM/YYYY'))
+            forecastingDay = '#dayThree';
         }
         else if(date-4 === today){
-            $('#dayFour').text(dayjs(data.list[i].dt_txt).format('DD/MM/YYYY'))
+            forecastingDay = '#dayFour';
         }
         else if(date-5 === today){
-            $('#dayFive').text(dayjs(data.list[i].dt_txt).format('DD/MM/YYYY'))
+            forecastingDay = '#dayFive';
         }
+
+        //Create an element for date
+        $(forecastingDay+'heading').text(dayjs(data.list[i].dt_txt).format('DD/MM/YYYY'));
+        $(forecastingDay+'Temp').text(Math.ceil(data.list[i].main.temp)+ " °C");
 
         //Maybe find the average temp for that day
 
