@@ -10,15 +10,17 @@ todayEl.innerText = formattedDate;
 
 
 //The location will be used to get lon and lat cordinates
-
-function urlGenerator (cityName, latitude, longitude){
+function urlGenerator (requestType, cityName, latitude, longitude){
     //Generate the url for weather fetch
-    let baseURL = "https://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+longitude+"&units=metric&appid="+API;
+    let baseURL = "https://api.openweathermap.org/data/2.5/"+requestType+"?lat="+latitude+"&lon="+longitude+"&units=metric&appid="+API;
     return baseURL;
 }
-let queryURL = urlGenerator('London', 51.509865, -0.118092);
+
+let queryURL = urlGenerator('weather','London', 51.509865, -0.118092);
 fetchWeather(queryURL)
 
+
+//Fetch current weather
 function fetchWeather(queryURL){
     fetch(queryURL)
     .then(function(response){
@@ -32,10 +34,34 @@ function fetchWeather(queryURL){
         //Information structure using ES6+ object destructuring
         ({name, weather, main, wind, sys} = data);
 
+        //Forecasting 5 days url
+        queryURL = urlGenerator('forecast','London', 51.509865, -0.118092);
+        fetchForecasting(queryURL);
+        //Display
         displayWeather(name, weather, main, wind, sys);
     })
 }
 
+//5 Days forecasting
+function fetchForecasting(queryURL){
+    //console.log(queryURL);
+    fetch(queryURL)
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(data){
+        console.log(data);
+
+        //Grab the dt which is date timestamp
+
+        //check if that date is today + 1
+
+        //Maybe find the average temp for that day
+
+        //
+    })
+}
+//Display the weather
 function displayWeather(cityName, weather, main, wind, sys){
     console.log(cityName)
     //console.log(weather)
@@ -58,6 +84,3 @@ function displayWeather(cityName, weather, main, wind, sys){
     $('#tempMax').text(Math.ceil(main.temp_max) + " °C");
 
 }
-
-
-//Planning
