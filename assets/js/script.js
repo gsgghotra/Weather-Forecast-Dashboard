@@ -81,6 +81,8 @@ function fetchForecasting(queryURL){
         $(forecastingDay+'heading').text(dayjs(data.list[i].dt_txt).format('DD/MM/YYYY'));
         $(forecastingDay+'Temp').text(Math.ceil(data.list[i].main.temp)+ " °C");
         $(forecastingDay+"icon").attr("src", "http://openweathermap.org/img/wn/" +data.list[i].weather[0].icon+ "@2x.png");
+        $(forecastingDay+'humidity').text(Math.ceil(data.list[i].main.humidity)+ "%");
+        $(forecastingDay+'wind').text(Math.ceil(data.list[i].wind.speed));
 
         //Maybe find the average temp for that day
 
