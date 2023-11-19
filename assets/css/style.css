@@ -101,15 +101,36 @@ body{
 .locationDescription{
     border: 1px solid green;
     padding: 10px;
+    display: grid;
+    /* justify-content: normal; */
+    align-items: center;
     margin-top: 30px;
 }
 
+#temprature{
+    font-size: 200%;
+}
+
+.descriptionHeading{
+    font-size: 20px;
+    margin: 0;
+}
+.descriptionText{
+    font-size: 14px;
+}
+
+/* 5Day Forecast */
 .fiveDayForecast {
     /* border: 1px solid red; */
     min-height: 200px;
     padding: 10px;
+    padding-top: 0;
+    padding-bottom: 44px;
 }
 
+.forecastHeading{
+    margin-top: 5px;
+}
 .forecastDay{
     border: 1px solid grey;
     min-height: 100px;

@@ -30,31 +30,32 @@ function fetchWeather(queryURL){
         console.log(data);
 
         //Information structure using ES6+ object destructuring
-        ({name, weather, main, wind} = data);
+        ({name, weather, main, wind, sys} = data);
 
-        displayWeather(name, weather, main, wind);
+        displayWeather(name, weather, main, wind, sys);
     })
 }
 
-function displayWeather(cityName, weather, main, wind){
+function displayWeather(cityName, weather, main, wind, sys){
     console.log(cityName)
     //console.log(weather)
     //Display City Name
-    let searchedLocation = document.getElementById('searchedLocation');
-    searchedLocation.innerText = cityName;
+    $('#searchedLocation').text(cityName);
 
     //Display Current Weather condition
-    let currentWeather = document.getElementById('currentWeather');
-    currentWeather.innerHTML = weather[0].main;
+    $('#currentWeather').text( weather[0].main);
 
-    //Add temprature, wind and humidity to the app
-    let tempratureEl = document.getElementById('temprature');
-    tempratureEl.innerText = "Temp: " + Math.ceil(main.temp) + " °C";
-    let humidityEl = document.getElementById('humidity');
-    humidityEl.innerText = "Humidity: " + main.humidity+"%";
-    let windEl = document.getElementById('wind');
-    windEl.innerText = "Speed: " + Math.round(wind.speed * 3.6)+ " KPH";
-    $("#weather_image").attr("src", "http://openweathermap.org/img/w/" + weather[0].icon + ".png");
+    //Add temprature, weather icon 
+    $('#temprature').text(Math.ceil(main.temp) + " °C")
+    $("#weather_image").attr("src", "http://openweathermap.org/img/wn/" +weather[0].icon+ "@2x.png");
+
+    //More information section
+    $('#humidity').text(main.humidity+"%");
+    $('#wind').text(Math.round(wind.speed * 3.6)+ " KPH");
+    $('#sunrise').text(sys.sunrise);
+    $('#sunset').text(sys.sunset);
+    $('#tempMin').text(Math.ceil(main.temp_min) + " °C");
+    $('#tempMax').text(Math.ceil(main.temp_max) + " °C");
 
 }
 
