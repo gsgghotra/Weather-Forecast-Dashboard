@@ -104,8 +104,8 @@ function displayWeather(cityName, weather, main, wind, sys){
     //More information section
     $('#humidity').text(main.humidity+"%");
     $('#wind').text(Math.round(wind.speed * 3.6)+ " KPH");
-    $('#sunrise').text(sys.sunrise);
-    $('#sunset').text(sys.sunset);
+    $('#sunrise').text(dayjs(new Date(sys.sunrise * 1000)).format('h:mm A'));
+    $('#sunset').text(dayjs(new Date(sys.sunset * 1000)).format('h:mm A'));
     $('#tempMin').text(Math.ceil(main.temp_min) + " °C");
     $('#tempMax').text(Math.ceil(main.temp_max) + " °C");
 
