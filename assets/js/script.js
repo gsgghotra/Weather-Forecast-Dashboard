@@ -123,3 +123,6 @@ function displayforecasting(data){
     //
     }
 }
+
+
+// console.log("No of cities in the array", cities.length);
