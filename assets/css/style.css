@@ -84,6 +84,18 @@ body{
 }
 
 
+/* Search History */
+#history{
+    margin-top: 15px;
+    min-height: 50px;
+    width: 80%;
+    border: 1px solid green;
+
+    .heading{
+        font-size: 15px;
+        color: grey;
+    }
+}
 /* Weather  */
 
 .currentWeather{

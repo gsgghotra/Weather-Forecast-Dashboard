@@ -2,60 +2,6 @@
 var search=document.getElementById('search-input');
 let API_KEY = '';
 
-//Temp variable for famous cities
-const famousCities = [
-    "New York City, USA",
-    "Tokyo, Japan",
-    "Paris, France",
-    "London, United Kingdom",
-    "Beijing, China",
-    "Sydney, Australia",
-    "Rio de Janeiro, Brazil",
-    "Moscow, Russia",
-    "Mumbai, India",
-    "Cairo, Egypt",
-    "Istanbul, Turkey",
-    "Dubai, UAE",
-    "Rome, Italy",
-    "Berlin, Germany",
-    "Cape Town, South Africa",
-    "Buenos Aires, Argentina",
-    "Seoul, South Korea",
-    "Bangkok, Thailand",
-    "Toronto, Canada",
-    "Mexico City, Mexico",
-    "Singapore",
-    "Barcelona, Spain",
-    "Los Angeles, USA",
-    "Shanghai, China",
-    "Amsterdam, Netherlands",
-    "Hong Kong, China",
-    "San Francisco, USA",
-    "Vancouver, Canada",
-    "Mumbai, India",
-    "Stockholm, Sweden",
-    "Athens, Greece",
-    "Prague, Czech Republic",
-    "Vienna, Austria",
-    "Dublin, Ireland",
-    "Copenhagen, Denmark",
-    "Kuala Lumpur, Malaysia",
-    "Johannesburg, South Africa",
-    "Jakarta, Indonesia",
-    "Warsaw, Poland",
-    "Budapest, Hungary",
-    "Oslo, Norway",
-    "Helsinki, Finland",
-    "Zurich, Switzerland",
-    "Lisbon, Portugal",
-    "Edinburgh, United Kingdom",
-    "Melbourne, Australia",
-    "Montreal, Canada",
-    "Chicago, USA",
-    "São Paulo, Brazil",
-    // Add more cities as needed
-];
-
 //Variable for saving the saerch
 let searchVal;
 let cordinates = new Map();
@@ -83,7 +29,7 @@ $('#search-input').on("keyup", function(event){
 //Auto complete Array generator and update search suggestion
 function autoCompleteGenerator(searchVal){
 
-    console.log(searchVal);
+    //console.log(searchVal);
 
     var url =  "http://api.openweathermap.org/geo/1.0/direct?q="+searchVal+"&limit=5&appid="+API_KEY;
     fetch(url)
@@ -108,12 +54,11 @@ function manualGeoSearch(searchVal){
     var url =  "http://api.openweathermap.org/geo/1.0/direct?q="+searchVal+"&limit=1&appid="+API_KEY;
     fetch(url)
     .then(function(response){
-        console.log(response);
         return response.json();
     })
     .then(function(data){
         if (data.length > 0){
-            console.log("Did you mean: ", data[0].name+", "+ data[0].country);
+            //console.log("Did you mean: ", data[0].name+", "+ data[0].country);
             let cityName = data[0].name+", "+ data[0].country;
             let locationLatitude = data[0].lat;
             let locationLongitude = data[0].lon;

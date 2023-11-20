@@ -26,7 +26,6 @@ function urlGenerator (requestType, cityName, latitude, longitude){
 
 //Fetch current weather
 function fetchWeather(queryURL, cityName){
-    console.log(queryURL)
     fetch(queryURL)
     .then(function(response){
         //Response
