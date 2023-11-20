@@ -9,7 +9,6 @@
 body{
     margin: 0;
     padding: 0;
-    background-color: var(--main-bg-color);
     background-color: #89D3DF;
     font-family: Inter, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     width: 100vw;
@@ -25,12 +24,13 @@ body{
     margin-top: 50px;
     /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
     /* border-radius: 25px; */
-    background-color: rgba(255, 255, 255, 0.58);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(2.9px);
-    -webkit-backdrop-filter: blur(2.9px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: rgb(148,184,233);
+    background: linear-gradient(90deg, rgba(148,184,233,0.35) 0%, rgba(216, 216, 216, 0.25) 50%);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4.5px );
+    -webkit-backdrop-filter: blur( 4.5px );
+    border-radius: 15px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
     
 }
 
@@ -103,7 +103,7 @@ body{
     margin-top: 15px;
     min-height: 50px;
     width: 80%;
-    border: 1px solid green;
+    /* border: 1px solid green; */
 
     .heading{
         font-size: 15px;
@@ -113,7 +113,7 @@ body{
 /* Weather  */
 
 .currentWeather{
-    border: 1px solid black;
+    /* border: 1px solid black; */
     padding: 10px;
     margin-top: 30px;
 }
@@ -122,11 +122,11 @@ body{
     padding: 10px;
     min-height: 80px;
     margin-top: 25px;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 .locationDescription{
-    border: 1px solid green;
+    /* border: 1px solid green; */
     padding: 10px;
     display: grid;
     /* justify-content: normal; */
@@ -161,6 +161,7 @@ body{
 }
 .forecastDay{
     border: 1px solid grey;
+    border-radius: 20px;
     min-height: 100px;
 
     .temp{
