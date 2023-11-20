@@ -16,6 +16,7 @@ function urlGenerator (requestType, cityName, latitude, longitude){
     return baseURL;
 }
 
+//By deafult load London
 let queryURL = urlGenerator('weather','London', 51.509865, -0.118092);
 fetchWeather(queryURL)
 
@@ -29,13 +30,13 @@ function fetchWeather(queryURL){
     })
     .then(function(data){
         //Display Weather data
-        console.log(data);
+        console.log("This ", data);
 
         //Information structure using ES6+ object destructuring
         ({name, weather, main, wind, sys} = data);
 
         //Forecasting 5 days url
-        queryURL = urlGenerator('forecast','London', 51.509865, -0.118092);
+        queryURL = urlGenerator('forecast',data.name, data.coord.lat, data.coord.lon);
         fetchForecasting(queryURL);
         //Display
         displayWeather(name, weather, main, wind, sys);
@@ -82,7 +83,7 @@ function fetchForecasting(queryURL){
         $(forecastingDay+'Temp').text(Math.ceil(data.list[i].main.temp)+ " °C");
         $(forecastingDay+"icon").attr("src", "http://openweathermap.org/img/wn/" +data.list[i].weather[0].icon+ "@2x.png");
         $(forecastingDay+'humidity').text(Math.ceil(data.list[i].main.humidity)+ "%");
-        $(forecastingDay+'wind').text(Math.ceil(data.list[i].wind.speed));
+        $(forecastingDay+'wind').text(Math.ceil(data.list[i].wind.speed * 3.6) + " KPH");
 
         //Maybe find the average temp for that day
 

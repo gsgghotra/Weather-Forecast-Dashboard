@@ -20,7 +20,7 @@ $('#search-input').on("keyup", function(event){
     if (searchVal.length > 1){
         //console.log(searchVal);
         //pass the searched characters to the location finder function
-        //autoCompleteGenerator(searchVal)
+        autoCompleteGenerator(searchVal)
     }
     
 });
@@ -56,7 +56,7 @@ $('#ui-id-1').on('click', (event)=>{
     if(cordinates.has(cityName)){
         const locationLatitude = cordinates.get(cityName).lat;
         const locationLongitude = cordinates.get(cityName).lon;
-        displayWeather(cityName, locationLatitude, locationLongitude);
+        fetchWeather(urlGenerator('weather', cityName, locationLatitude, locationLongitude));
     }
 });
 
