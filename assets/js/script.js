@@ -8,21 +8,25 @@ var API = "";
 var todayEl = document.getElementById('todayDate');
 todayEl.innerText = formattedDate;
 
+//By deafult load London
+let queryURL = urlGenerator('weather','London', 51.509865, -0.118092);
 
 //The location will be used to get lon and lat cordinates
 function urlGenerator (requestType, cityName, latitude, longitude){
     //Generate the url for weather fetch
     let baseURL = "https://api.openweathermap.org/data/2.5/"+requestType+"?lat="+latitude+"&lon="+longitude+"&units=metric&appid="+API;
-    return baseURL;
+    
+    if (requestType === 'weather'){ //If request type is weather, fetch weather
+        fetchWeather(baseURL, cityName);
+    }
+    else if (requestType === 'forecast'){ // return baseURL;
+        return baseURL;
+    }
 }
 
-//By deafult load London
-let queryURL = urlGenerator('weather','London', 51.509865, -0.118092);
-fetchWeather(queryURL)
-
-
 //Fetch current weather
-function fetchWeather(queryURL){
+function fetchWeather(queryURL, cityName){
+    console.log(queryURL)
     fetch(queryURL)
     .then(function(response){
         //Response
@@ -30,16 +34,16 @@ function fetchWeather(queryURL){
     })
     .then(function(data){
         //Display Weather data
-        console.log("This ", data);
+        console.log("This is weather data ", data);
 
         //Information structure using ES6+ object destructuring
         ({name, weather, main, wind, sys} = data);
 
         //Forecasting 5 days url
-        queryURL = urlGenerator('forecast',data.name, data.coord.lat, data.coord.lon);
+        queryURL = urlGenerator('forecast',cityName, data.coord.lat, data.coord.lon);
         fetchForecasting(queryURL);
         //Display
-        displayWeather(name, weather, main, wind, sys);
+        displayWeather(cityName, weather, main, wind, sys);
     })
 }
 
@@ -51,44 +55,8 @@ function fetchForecasting(queryURL){
         return response.json();
     })
     .then(function(data){
-        console.log(data);
-
-        const today = parseInt(dayjs().format('DD')); //Save it as a number
-        let forecastingDay;
-
-        for(let i = 0; i < data.cnt; i++){
-            let date = parseInt(dayjs(data.list[i].dt_txt).format('DD')); //Save it as a number
-        
-        //Grab the dt which is date timestamp
-
-        //check if that date is today + 1
-        if(date-1 === today){
-            forecastingDay = '#dayOne';
-        }
-        else if(date-2 === today){
-            forecastingDay = '#dayTwo';
-        }
-        else if(date-3 === today){
-            forecastingDay = '#dayThree';
-        }
-        else if(date-4 === today){
-            forecastingDay = '#dayFour';
-        }
-        else if(date-5 === today){
-            forecastingDay = '#dayFive';
-        }
-
-        //Create an element for date
-        $(forecastingDay+'heading').text(dayjs(data.list[i].dt_txt).format('DD/MM/YYYY'));
-        $(forecastingDay+'Temp').text(Math.ceil(data.list[i].main.temp)+ " °C");
-        $(forecastingDay+"icon").attr("src", "http://openweathermap.org/img/wn/" +data.list[i].weather[0].icon+ "@2x.png");
-        $(forecastingDay+'humidity').text(Math.ceil(data.list[i].main.humidity)+ "%");
-        $(forecastingDay+'wind').text(Math.ceil(data.list[i].wind.speed * 3.6) + " KPH");
-
-        //Maybe find the average temp for that day
-
-        //
-        }
+        //console.log(data);
+        displayforecasting(data);
     })
 }
 //Display the weather
@@ -113,4 +81,45 @@ function displayWeather(cityName, weather, main, wind, sys){
     $('#tempMin').text(Math.ceil(main.temp_min) + " °C");
     $('#tempMax').text(Math.ceil(main.temp_max) + " °C");
 
+}
+
+//Display 5 days forecasting
+
+function displayforecasting(data){
+    const today = parseInt(dayjs().format('DD')); //Save it as a number
+    let forecastingDay;
+
+    for(let i = 0; i < data.cnt; i++){
+        let date = parseInt(dayjs(data.list[i].dt_txt).format('DD')); //Save it as a number
+    
+    //Grab the dt which is date timestamp
+
+    //check if that date is today + 1
+    if(date-1 === today){
+        forecastingDay = '#dayOne';
+    }
+    else if(date-2 === today){
+        forecastingDay = '#dayTwo';
+    }
+    else if(date-3 === today){
+        forecastingDay = '#dayThree';
+    }
+    else if(date-4 === today){
+        forecastingDay = '#dayFour';
+    }
+    else if(date-5 === today){
+        forecastingDay = '#dayFive';
+    }
+
+    //Create an element for date
+    $(forecastingDay+'heading').text(dayjs(data.list[i].dt_txt).format('DD/MM/YYYY'));
+    $(forecastingDay+'Temp').text(Math.ceil(data.list[i].main.temp)+ " °C");
+    $(forecastingDay+"icon").attr("src", "http://openweathermap.org/img/wn/" +data.list[i].weather[0].icon+ "@2x.png");
+    $(forecastingDay+'humidity').text(Math.ceil(data.list[i].main.humidity)+ "%");
+    $(forecastingDay+'wind').text(Math.ceil(data.list[i].wind.speed * 3.6) + " KPH");
+
+    //Maybe find the average temp for that day
+
+    //
+    }
 }

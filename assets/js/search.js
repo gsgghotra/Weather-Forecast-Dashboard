@@ -56,7 +56,7 @@ $('#ui-id-1').on('click', (event)=>{
     if(cordinates.has(cityName)){
         const locationLatitude = cordinates.get(cityName).lat;
         const locationLongitude = cordinates.get(cityName).lon;
-        fetchWeather(urlGenerator('weather', cityName, locationLatitude, locationLongitude));
+        urlGenerator('weather', cityName, locationLatitude, locationLongitude);
     }
 });
 
