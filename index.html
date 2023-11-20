@@ -31,130 +31,129 @@
     </ul>
   </header>
   <div class="container">
-  </div>
-  <!-- max-width for ultra wide resolutions -->
-  <div class="container-fluid main" style="max-width: 1200px">
-    <div class="row search">
-      <!-- Search Box -->
-      <form id="search-form" class="form">
-        <i class="search-icon fas fa-search"></i>
-        <input type="text" id="search-input" placeholder="Search for a City" aria-labelledby="form-heading" aria-controls="today forecast" >
-        <button type="submit" class="btn search-button" id="search-button" aria-label="submit search">
-          Search
-        </button>
-      </form>
+    <!-- max-width for ultra wide resolutions -->
+    <div class="container-fluid main" style="max-width: 1200px">
+      <div class="row search">
+        <!-- Search Box -->
+        <form id="search-form" class="form">
+          <i class="search-icon fas fa-search"></i>
+          <input type="text" id="search-input" placeholder="Search for a City" aria-labelledby="form-heading" aria-controls="today forecast" >
+          <button type="submit" class="btn search-button" id="search-button" aria-label="submit search">
+            Search
+          </button>
+        </form>
 
-      <!-- Search History -->
-      <div class="list-group" id="history">
-        <h4 class="heading">Recently viewed:</h4>
+        <!-- Search History -->
+        <div class="list-group" id="history">
+          <h4 class="heading">Recently viewed:</h4>
+        </div>
+        </div>
+
+      <!-- Current Location -->
+      <div class="row justify-content-evenly currentLocation">
+        <aside class="col-4 pb-3 text-center currentWeather">
+          <!-- Current Location -->
+          <h2 id="searchedLocation">London</h2>
+          <section id="todayDate"></section>
+          <section id="weatherStatus">
+
+            <!-- 1 Row and 2 columns -->
+            <div class="row">
+              <div class="col-6">
+                <img id="weather_image"></img>
+              </div>
+              <div class="col-6">
+                <p id="temprature"></p>
+                <p id="currentWeather">Rain</p>
+              </div>
+            </div>
+            
+          </section>
+        </aside>
+        <div class="col-6 pb-3 locationDescription">
+          <section id="today" class="mt-3" role="region" aria-live="polite">
+            <!-- Row for 3 columns -->
+            <div class="row justify-content-evenly text-center align-items-center">
+
+              <!-- Each col can have 2 rows -->
+              <div class="col-4">
+                <div class="row">
+                  <p class="descriptionHeading">Max</p>
+                  <p class="descriptionText" id="tempMax"></p>
+                </div>
+                <div class="row">
+                  <p class="descriptionHeading">Min</p>
+                  <p class="descriptionText" id="tempMin"></p>
+                </div>
+              </div>
+
+              <div class="col-4">
+                <div class="row">
+                  <p class="descriptionHeading">Wind</p>
+                  <p class="descriptionText" id="wind"></p>
+                </div>
+                <div class="row">
+                  <p class="descriptionHeading">Humidity</p>
+                  <p class="descriptionText" id="humidity"></p>
+                </div>
+              </div>
+
+              <div class="col-4">
+                <div class="row">
+                  <p class="descriptionHeading">Sunrise</p>
+                  <p class="descriptionText" id="sunrise"></p>
+                </div>
+                <div class="row">
+                  <p class="descriptionHeading">Sunset</p>
+                  <p class="descriptionText" id="sunset"></p>
+              </div>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
-      </div>
 
-    <!-- Current Location -->
-    <div class="row justify-content-evenly currentLocation">
-      <aside class="col-4 pb-3 text-center currentWeather">
-        <!-- Current Location -->
-        <h2 id="searchedLocation">London</h2>
-        <section id="todayDate"></section>
-        <section id="weatherStatus">
-
-          <!-- 1 Row and 2 columns -->
-          <div class="row">
-            <div class="col-6">
-              <img id="weather_image"></img>
-            </div>
-            <div class="col-6">
-              <p id="temprature"></p>
-              <p id="currentWeather">Rain</p>
-            </div>
-          </div>
-          
-        </section>
-      </aside>
-      <div class="col-6 pb-3 locationDescription">
-        <section id="today" class="mt-3" role="region" aria-live="polite">
-          <!-- Row for 3 columns -->
-          <div class="row justify-content-evenly text-center align-items-center">
-
-            <!-- Each col can have 2 rows -->
-            <div class="col-4">
-              <div class="row">
-                <p class="descriptionHeading">Max</p>
-                <p class="descriptionText" id="tempMax"></p>
-              </div>
-              <div class="row">
-                <p class="descriptionHeading">Min</p>
-                <p class="descriptionText" id="tempMin"></p>
-              </div>
-            </div>
-
-            <div class="col-4">
-              <div class="row">
-                <p class="descriptionHeading">Wind</p>
-                <p class="descriptionText" id="wind"></p>
-              </div>
-              <div class="row">
-                <p class="descriptionHeading">Humidity</p>
-                <p class="descriptionText" id="humidity"></p>
-              </div>
-            </div>
-
-            <div class="col-4">
-              <div class="row">
-                <p class="descriptionHeading">Sunrise</p>
-                <p class="descriptionText" id="sunrise"></p>
-              </div>
-              <div class="row">
-                <p class="descriptionHeading">Sunset</p>
-                <p class="descriptionText" id="sunset"></p>
-            </div>
-            </div>
-          </div>
-        </section>
+      <!-- 5 Day Forecast -->
+      <h6 class="forecastHeading row ms-3 ps-3">5 Day Forecast</h6>
+      <div class="row fiveDayForecast justify-content-evenly">
+        <div id="dayOne" class="col-2 forecastDay">
+          <h5 id="dayOneheading"></h5>
+          <p id="dayOneTemp" class="temp"></p>
+          <img id="dayOneicon"></img>
+          <p id="dayOnehumidity" class="humidity"></p>
+          <p id="dayOnewind" class="wind"></p>
+        </div>
+        <div id="dayTwo" class="col-2 forecastDay">
+          <h5 id="dayTwoheading"></h5>
+          <p id="dayTwoTemp" class="temp"></p>
+          <img id="dayTwoicon"></img>
+          <p id="dayTwohumidity" class="humidity"></p>
+          <p id="dayTwowind" class="wind"></p>
+        </div>
+        <div id="dayThree" class="col-2 forecastDay">
+          <h5 id="dayThreeheading"></h5>
+          <p id="dayThreeTemp" class="temp"></p>
+          <img id="dayThreeicon"></img>
+          <p id="dayThreehumidity" class="humidity"></p>
+          <p id="dayThreewind" class="wind"></p>
+        </div>
+        <div id="dayFour" class="col-2 forecastDay">
+          <h5 id="dayFourheading"></h5>
+          <p id="dayFourTemp" class="temp"></p>
+          <img id="dayFouricon"></img>
+          <p id="dayFourhumidity" class="humidity"></p>
+          <p id="dayFourwind" class="wind"></p>
+        </div>
+        <div id="dayFive" class="col-2 forecastDay">
+          <h5 id="dayFiveheading"></h5>
+          <p id="dayFiveTemp" class="temp"></p>
+          <img id="dayFiveicon"></img>
+          <p id="dayFivehumidity" class="humidity"></p>
+          <p id="dayFivewind" class="wind"></p>
+        </div>
       </div>
     </div>
-
-    <!-- 5 Day Forecast -->
-    <h6 class="forecastHeading row ms-3 ps-3">5 Day Forecast</h6>
-    <div class="row fiveDayForecast justify-content-evenly">
-      <div id="dayOne" class="col-2 forecastDay">
-        <h5 id="dayOneheading"></h5>
-        <p id="dayOneTemp" class="temp"></p>
-        <img id="dayOneicon"></img>
-        <p id="dayOnehumidity" class="humidity"></p>
-        <p id="dayOnewind" class="wind"></p>
-      </div>
-      <div id="dayTwo" class="col-2 forecastDay">
-        <h5 id="dayTwoheading"></h5>
-        <p id="dayTwoTemp" class="temp"></p>
-        <img id="dayTwoicon"></img>
-        <p id="dayTwohumidity" class="humidity"></p>
-        <p id="dayTwowind" class="wind"></p>
-      </div>
-      <div id="dayThree" class="col-2 forecastDay">
-        <h5 id="dayThreeheading"></h5>
-        <p id="dayThreeTemp" class="temp"></p>
-        <img id="dayThreeicon"></img>
-        <p id="dayThreehumidity" class="humidity"></p>
-        <p id="dayThreewind" class="wind"></p>
-      </div>
-      <div id="dayFour" class="col-2 forecastDay">
-        <h5 id="dayFourheading"></h5>
-        <p id="dayFourTemp" class="temp"></p>
-        <img id="dayFouricon"></img>
-        <p id="dayFourhumidity" class="humidity"></p>
-        <p id="dayFourwind" class="wind"></p>
-      </div>
-      <div id="dayFive" class="col-2 forecastDay">
-        <h5 id="dayFiveheading"></h5>
-        <p id="dayFiveTemp" class="temp"></p>
-        <img id="dayFiveicon"></img>
-        <p id="dayFivehumidity" class="humidity"></p>
-        <p id="dayFivewind" class="wind"></p>
-      </div>
-    </div>
   </div>
-
 
   <!-- Day.js -->
   <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>

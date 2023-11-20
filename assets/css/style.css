@@ -10,14 +10,28 @@ body{
     margin: 0;
     padding: 0;
     background-color: var(--main-bg-color);
+    background-color: #89D3DF;
     font-family: Inter, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    width: 100vw;
+    height: 100vh;
+    background: url('/assets/images/bg.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .main{
     padding-top: 20px;
     margin-top: 50px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    border-radius: 25px;
+    /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+    /* border-radius: 25px; */
+    background-color: rgba(255, 255, 255, 0.58);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(2.9px);
+    -webkit-backdrop-filter: blur(2.9px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    
 }
 
 /* Heading */
