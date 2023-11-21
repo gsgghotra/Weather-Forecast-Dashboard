@@ -1,6 +1,22 @@
 //Search bar border focus
-var search=document.getElementById('search-input');
+let search=document.getElementById('search-input');
+let recentSearch = new Map();
 let API_KEY = '';
+
+let locallyStored = localStorage.getItem("searchmap");
+//Converting stored array into map
+locallyStored = new Map(JSON.parse(locallyStored));
+
+let searchedCities = [];
+// Adding locally stored searched list into map
+if (locallyStored.size){
+    recentSearch = locallyStored;
+
+    //Add cities into the array that will store recent search
+    searchedCities.unshift(Array.from(locallyStored.keys()));
+}
+
+
 
 //Variable for saving the saerch
 let searchVal;
@@ -62,7 +78,10 @@ function manualGeoSearch(searchVal){
             let cityName = data[0].name+", "+ data[0].country;
             let locationLatitude = data[0].lat;
             let locationLongitude = data[0].lon;
-            //load weather if city found on search click
+
+            //Store the searched city in local storage
+            searchHistory(cityName, locationLatitude, locationLongitude);
+            //load weather! if city found on search click
             urlGenerator('weather', cityName, locationLatitude, locationLongitude);
         } else {
             console.log("City not found")
@@ -77,12 +96,16 @@ $('#ui-id-1').on('click', (event)=>{
     event.preventDefault();
     //console.log(event);
     let searchedLocation = document.getElementById('searchedLocation');
+    
     const cityName = event.target.innerText;
 
     //If map has the valuses of the selected city
     if(cordinates.has(cityName)){
         const locationLatitude = cordinates.get(cityName).lat;
         const locationLongitude = cordinates.get(cityName).lon;
+
+        //Store the searched city in local storage
+        searchHistory(cityName, locationLatitude, locationLongitude);
         urlGenerator('weather', cityName, locationLatitude, locationLongitude);
     }
 });
@@ -96,11 +119,15 @@ $('#search-button').on('click', (event)=>{
     
     //add saerched Location the screen
     let searchedLocation = document.getElementById('searchedLocation');
-    
-
     manualGeoSearch(searchVal);
 })
 
+
+//Function to process search history
+function searchHistory(cityName, locationLatitude, locationLongitude){
+    recentSearch.set(cityName, {"lat" : locationLatitude, "lon": locationLongitude})
+    localStorage.setItem("searchmap", JSON.stringify(Array.from(recentSearch.entries())));
+}
 
 //On focus add border
 search.addEventListener('focus',(event)=>{
