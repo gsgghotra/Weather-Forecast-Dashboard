@@ -55,7 +55,7 @@ function fetchForecasting(queryURL){
     })
     .then(function(data){
         //console.log(data);
-        displayforecasting(data);
+       displayforecasting(data);
     })
 }
 //Display the weather
@@ -108,12 +108,18 @@ function displayforecasting(data){
     }
 
     const today = parseInt(dayjs().format('DD')); //Save it as a number
-    let forecastingDay;
+    let forecastingDay, weatherIcon, weatherStatus;
 
     for(let i = 0; i < data.cnt; i++){
         let date = parseInt(dayjs(data.list[i].dt_txt).format('DD')); //Save it as a number
-    
-    //Grab the dt which is date timestamp
+
+        
+    //Grab the mid day weather icon for future 5 days
+    if (dayjs(data.list[i].dt_txt).format('HH') === '12'){
+        weatherIcon =  data.list[i].weather[0].icon;
+        weatherStatus = data.list[i].weather[0].main;
+        console.log(weatherIcon)
+    }
 
     //check if that date is today + 1
     if(date-1 === today){
@@ -135,8 +141,8 @@ function displayforecasting(data){
     //Create an element for date
     $(forecastingDay+'heading').text(dayjs(data.list[i].dt_txt).format('dddd, DD'));
     $(forecastingDay+'Temp').text(Math.ceil(data.list[i].main.temp)+ " °C");
-    $(forecastingDay+'Status').text(data.list[i].weather[0].main);
-    $(forecastingDay+"icon").attr("src", "http://openweathermap.org/img/wn/" +data.list[i].weather[0].icon+ "@2x.png");
+    $(forecastingDay+'Status').text(weatherStatus);
+    $(forecastingDay+"icon").attr("src", "http://openweathermap.org/img/wn/" +weatherIcon+ "@2x.png");
     $(forecastingDay+'humidity').text(Math.ceil(data.list[i].main.humidity)+ "%");
     $(forecastingDay+'humidity').prepend(`<i class="fa-solid fa-droplet"></i>`);
     $(forecastingDay+'wind').text(Math.ceil(data.list[i].wind.speed * 3.6) + " KPH");

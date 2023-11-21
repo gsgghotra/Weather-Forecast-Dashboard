@@ -141,10 +141,7 @@ body{
     filter: drop-shadow(3px 3px 3px #505050);
 }
 .locationDescription{
-    /* border: 1px solid green; */
-    /* padding: 10px; */
     display: grid;
-    /* justify-content: normal; */
     align-items: center;
     margin-top: -7px;
 }
@@ -154,19 +151,21 @@ body{
 }
 
 .descriptionHeading{
-    font-size: 20px;
+    font-size: 16px;
     padding-bottom: 5px;
     margin: 0;
+    color: #737373;
     margin-top: 14px;
 }
 .descriptionText{
     margin-top: 2px;
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: 400;
+    color: #302e2e;
 }
 
 /* 5Day Forecast */
 .fiveDayForecast {
-    /* border: 1px solid red; */
     min-height: 200px;
     padding: 10px;
     padding-top: 0;
@@ -179,11 +178,8 @@ body{
     color: #444444;
 }
 .forecastDay{
-    /* border: 1px solid grey; */
     border-radius: 15px;
     min-height: 100px;
-    /* background-color: #ffffff; */
-    /* padding: 5px; */
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
     .temp{
