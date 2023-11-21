@@ -123,9 +123,12 @@ $('#search-button').on('click', (event)=>{
 //Function to process search history
 function searchHistory(cityName){
 
+    // Create a Set to remove dups including the current city name
+    const noDup = new Set([cityName, ...searchedCities]);
+    searchedCities = [...noDup]
+
     //Adding the searched city into the array
     $('#historyHeading').show();
-    searchedCities.unshift(cityName);
     updateSearchList();
 }
 
