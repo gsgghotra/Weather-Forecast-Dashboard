@@ -1,6 +1,5 @@
 //Search bar border focus
 let search=document.getElementById('search-input');
-let API_KEY = '';
 
 let locallyStored = localStorage.getItem("searchList");
 //Converting stored array
@@ -15,7 +14,6 @@ if (locallyStored){
 } else {
     $('#historyHeading').hide();
 }
-
 //Variable for saving the search
 let searchVal;
 let cordinates = new Map();
@@ -45,7 +43,7 @@ function autoCompleteGenerator(searchVal){
 
     //console.log(searchVal);
 
-    var url =  "http://api.openweathermap.org/geo/1.0/direct?q="+searchVal+"&limit=5&appid="+API_KEY;
+    var url =  "http://api.openweathermap.org/geo/1.0/direct?q="+searchVal+"&limit=5&appid="+API;
     fetch(url)
     .then(function(response){
         //console.log(response);
@@ -64,14 +62,13 @@ function autoCompleteGenerator(searchVal){
 }
 
 function manualGeoSearch(searchVal){
-    var url =  "http://api.openweathermap.org/geo/1.0/direct?q="+searchVal+"&limit=1&appid="+API_KEY;
+    var url =  "http://api.openweathermap.org/geo/1.0/direct?q="+searchVal+"&limit=1&appid="+API;
     fetch(url)
     .then(function(response){
         return response.json();
     })
     .then(function(data){
         if (data.length > 0){
-            //console.log("Did you mean: ", data[0].name+", "+ data[0].country);
             let cityName = data[0].name+", "+ data[0].country;
             let locationLatitude = data[0].lat;
             let locationLongitude = data[0].lon;
@@ -81,7 +78,7 @@ function manualGeoSearch(searchVal){
             //load weather! if city found on search click
             urlGenerator('weather', cityName, locationLatitude, locationLongitude);
         } else {
-            console.log("City not found")
+            console.log("City not found");
         }
         
     })
