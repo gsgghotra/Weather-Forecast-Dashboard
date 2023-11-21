@@ -1,24 +1,22 @@
 //Search bar border focus
 let search=document.getElementById('search-input');
-let recentSearch = new Map();
 let API_KEY = '';
 
-let locallyStored = localStorage.getItem("searchmap");
-//Converting stored array into map
-locallyStored = new Map(JSON.parse(locallyStored));
+let locallyStored = localStorage.getItem("searchList");
+//Converting stored array
 
 let searchedCities = [];
-// Adding locally stored searched list into map
-if (locallyStored.size){
-    recentSearch = locallyStored;
 
-    //Add cities into the array that will store recent search
-    searchedCities.unshift(Array.from(locallyStored.keys()));
+// Adding locally stored searched list into the arrays
+if (locallyStored){
+    locallyStored = JSON.parse(locallyStored);
+    searchedCities = [...locallyStored];
+    updateSearchList();
+} else {
+    $('#historyHeading').hide();
 }
 
-
-
-//Variable for saving the saerch
+//Variable for saving the search
 let searchVal;
 let cordinates = new Map();
 
@@ -80,7 +78,7 @@ function manualGeoSearch(searchVal){
             let locationLongitude = data[0].lon;
 
             //Store the searched city in local storage
-            searchHistory(cityName, locationLatitude, locationLongitude);
+            searchHistory(cityName);
             //load weather! if city found on search click
             urlGenerator('weather', cityName, locationLatitude, locationLongitude);
         } else {
@@ -105,7 +103,7 @@ $('#ui-id-1').on('click', (event)=>{
         const locationLongitude = cordinates.get(cityName).lon;
 
         //Store the searched city in local storage
-        searchHistory(cityName, locationLatitude, locationLongitude);
+        searchHistory(cityName);
         urlGenerator('weather', cityName, locationLatitude, locationLongitude);
     }
 });
@@ -124,10 +122,35 @@ $('#search-button').on('click', (event)=>{
 
 
 //Function to process search history
-function searchHistory(cityName, locationLatitude, locationLongitude){
-    recentSearch.set(cityName, {"lat" : locationLatitude, "lon": locationLongitude})
-    localStorage.setItem("searchmap", JSON.stringify(Array.from(recentSearch.entries())));
+function searchHistory(cityName){
+
+    //Adding the searched city into the array
+    $('#historyHeading').show();
+    searchedCities.unshift(cityName);
+    updateSearchList();
 }
+
+
+function updateSearchList(){
+    //Add cities into the array that will store recent search
+    let citiesList = document.getElementById('listOfCities');
+    citiesList.innerText = "";
+
+    //Remove more values than 5 from search history
+    for (let i = 5; i < searchedCities.length; i++){
+        console.log("City should be rempoved",searchedCities[i]);
+        searchedCities.splice([i],searchedCities.length);
+    }
+
+    //Add searched city in the array and save in localstorage
+    localStorage.setItem("searchList", JSON.stringify(searchedCities));
+
+    //appending searched Cities to the searched history
+    for (let i = 0; i < searchedCities.length; i++){
+        $('#listOfCities').append(`<p>${searchedCities[i]}</p>`);
+    }
+}
+
 
 //On focus add border
 search.addEventListener('focus',(event)=>{

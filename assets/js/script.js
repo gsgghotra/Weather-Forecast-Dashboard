@@ -1,7 +1,6 @@
 //Today's Date 
 var timeNow = dayjs();
 var formattedDate = dayjs(timeNow).format('dddd, MMMM D');
-console.log(formattedDate);
 
 var API = "";
 //Append the time to the page
@@ -33,7 +32,7 @@ function fetchWeather(queryURL, cityName){
     })
     .then(function(data){
         //Display Weather data
-        console.log("This is weather data ", data);
+        //console.log("This is weather data ", data);
 
         //Information structure using ES6+ object destructuring
         ({name, weather, main, wind, sys, timezone} = data);
@@ -87,7 +86,6 @@ function displayWeather(cityName, weather, main, wind, sys, timezone){
 
 //Display 5 days forecasting
 function displayforecasting(data){
-    console.log(data);
     //Create HTML elements for 5 days
     for(let i = 1; i < 6 ; i++){
         //Remove if the element already exists
@@ -157,6 +155,3 @@ function displayforecasting(data){
     //
     }
 }
-
-
-// console.log("No of cities in the array", cities.length);

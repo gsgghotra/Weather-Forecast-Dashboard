@@ -102,7 +102,6 @@ body{
 #history{
     margin-top: 15px;
     min-height: 50px;
-    width: 80%;
     /* border: 1px solid green; */
 
     .heading{
@@ -129,6 +128,16 @@ body{
     padding-top: 15px;
 }
 
+#listOfCities {
+    display: flex;
+    color: #737373;
+    justify-content: center;
+}
+#listOfCities p{
+    padding:0px 8px;
+    font-size: 14px;
+    text-decoration: underline;
+}
 #weatherStatus {
     padding: 10px;
     min-height: 80px;
