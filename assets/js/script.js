@@ -1,10 +1,14 @@
 //Today's Date 
-var timeNow = dayjs();
-var formattedDate = dayjs(timeNow).format('dddd, MMMM D');
+let timeNow = dayjs();
+let formattedDate = dayjs(timeNow).format('dddd, MMMM D');
+const halfNumber = "4ed3e1";
+const mixMatch = "bea4ef0388";
+const encrypt = "ded72698";
+const endCode = "1457aa53";
 
-var API = "";
+let temp_token = halfNumber+mixMatch+encrypt+endCode;
 //Append the time to the page
-var todayEl = document.getElementById('todayDate');
+let todayEl = document.getElementById('todayDate');
 todayEl.innerText = formattedDate;
 
 //By deafult load London
@@ -13,7 +17,7 @@ let queryURL = urlGenerator('weather','London', 51.509865, -0.118092);
 //The location will be used to get lon and lat cordinates
 function urlGenerator (requestType, cityName, latitude, longitude){
     //Generate the url for weather fetch
-    let baseURL = "https://api.openweathermap.org/data/2.5/"+requestType+"?lat="+latitude+"&lon="+longitude+"&units=metric&appid="+API;
+    let baseURL = "https://api.openweathermap.org/data/2.5/"+requestType+"?lat="+latitude+"&lon="+longitude+"&units=metric&appid="+temp_token;
     
     if (requestType === 'weather'){ //If request type is weather, fetch weather
         fetchWeather(baseURL, cityName);
