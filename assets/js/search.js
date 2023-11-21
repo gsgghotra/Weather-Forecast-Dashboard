@@ -63,7 +63,6 @@ function autoCompleteGenerator(searchVal){
     })
 }
 
-
 function manualGeoSearch(searchVal){
     var url =  "http://api.openweathermap.org/geo/1.0/direct?q="+searchVal+"&limit=1&appid="+API_KEY;
     fetch(url)
@@ -130,7 +129,7 @@ function searchHistory(cityName){
     updateSearchList();
 }
 
-
+//Function that manages length of searched array and appends the list to the dashboard
 function updateSearchList(){
     //Add cities into the array that will store recent search
     let citiesList = document.getElementById('listOfCities');
@@ -151,6 +150,11 @@ function updateSearchList(){
     }
 }
 
+//Event listener for search History
+$('#listOfCities').on('click', (event)=>{
+    //Trigger manual Search for the city
+    manualGeoSearch(event.target.innerText);
+})
 
 //On focus add border
 search.addEventListener('focus',(event)=>{
