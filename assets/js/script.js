@@ -36,13 +36,13 @@ function fetchWeather(queryURL, cityName){
         console.log("This is weather data ", data);
 
         //Information structure using ES6+ object destructuring
-        ({name, weather, main, wind, sys} = data);
+        ({name, weather, main, wind, sys, timezone} = data);
 
         //Forecasting 5 days url
         queryURL = urlGenerator('forecast',cityName, data.coord.lat, data.coord.lon);
         fetchForecasting(queryURL);
         //Display
-        displayWeather(cityName, weather, main, wind, sys);
+        displayWeather(cityName, weather, main, wind, sys, timezone);
     })
 }
 
@@ -59,9 +59,8 @@ function fetchForecasting(queryURL){
     })
 }
 //Display the weather
-function displayWeather(cityName, weather, main, wind, sys){
-    console.log(cityName)
-    //console.log(weather)
+function displayWeather(cityName, weather, main, wind, sys, timezone){
+
     //Display City Name
     $('#searchedLocation').text(cityName);
 
@@ -75,8 +74,9 @@ function displayWeather(cityName, weather, main, wind, sys){
     //More information section
     $('#humidity').text(main.humidity+"%");
     $('#wind').text(Math.round(wind.speed * 3.6)+ " KPH");
-    $('#sunrise').text(dayjs(new Date(sys.sunrise * 1000)).format('h:mm A'));
-    $('#sunset').text(dayjs(new Date(sys.sunset * 1000)).format('h:mm A'));
+    $('#sunrise').text(dayjs(new Date(sys.sunrise * 1000)- timezone * 60 * 1000).format('h:mm A')); 
+    //Converted into localtime using ( - timezone * 60 * 1000) timezone formula
+    $('#sunset').text(dayjs(new Date(sys.sunset * 1000)- timezone * 60 * 1000).format('h:mm A'));
     $('#tempMin').text(Math.ceil(main.temp_min) + " °C");
     $('#tempMax').text(Math.ceil(main.temp_max) + " °C");
 
@@ -108,7 +108,7 @@ function displayforecasting(data){
     }
 
     const today = parseInt(dayjs().format('DD')); //Save it as a number
-    let forecastingDay, weatherIcon, weatherStatus;
+    let forecastingDay, weatherIcon, weatherStatus, averageTemp;
 
     for(let i = 0; i < data.cnt; i++){
         let date = parseInt(dayjs(data.list[i].dt_txt).format('DD')); //Save it as a number
@@ -118,7 +118,7 @@ function displayforecasting(data){
     if (dayjs(data.list[i].dt_txt).format('HH') === '12'){
         weatherIcon =  data.list[i].weather[0].icon;
         weatherStatus = data.list[i].weather[0].main;
-        console.log(weatherIcon)
+        averageTemp = Math.ceil(data.list[i].main.temp);
     }
 
     //check if that date is today + 1
@@ -140,7 +140,7 @@ function displayforecasting(data){
 
     //Create an element for date
     $(forecastingDay+'heading').text(dayjs(data.list[i].dt_txt).format('dddd, DD'));
-    $(forecastingDay+'Temp').text(Math.ceil(data.list[i].main.temp)+ " °C");
+    $(forecastingDay+'Temp').text(averageTemp+ " °C");
     $(forecastingDay+'Status').text(weatherStatus);
     $(forecastingDay+"icon").attr("src", "http://openweathermap.org/img/wn/" +weatherIcon+ "@2x.png");
     $(forecastingDay+'humidity').text(Math.ceil(data.list[i].main.humidity)+ "%");
