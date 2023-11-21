@@ -61,6 +61,9 @@ function fetchForecasting(queryURL){
 //Display the weather
 function displayWeather(cityName, weather, main, wind, sys, timezone){
 
+    const sunriseTime = new Date((sys.sunrise+timezone)*1000);
+    const sunsetTime = new Date((sys.sunset+timezone)*1000);
+
     //Display City Name
     $('#searchedLocation').text(cityName);
 
@@ -74,9 +77,9 @@ function displayWeather(cityName, weather, main, wind, sys, timezone){
     //More information section
     $('#humidity').text(main.humidity+"%");
     $('#wind').text(Math.round(wind.speed * 3.6)+ " KPH");
-    $('#sunrise').text(dayjs(new Date(sys.sunrise * 1000)- timezone * 60 * 1000).format('h:mm A')); 
+    $('#sunrise').text(dayjs(new Date(sunriseTime)).format('h:mm A')); 
     //Converted into localtime using ( - timezone * 60 * 1000) timezone formula
-    $('#sunset').text(dayjs(new Date(sys.sunset * 1000)- timezone * 60 * 1000).format('h:mm A'));
+    $('#sunset').text(dayjs(new Date(sunsetTime)).format('h:mm A'));
     $('#tempMin').text(Math.ceil(main.temp_min) + " °C");
     $('#tempMax').text(Math.ceil(main.temp_max) + " °C");
 

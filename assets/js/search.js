@@ -38,7 +38,7 @@ function autoCompleteGenerator(searchVal){
         return response.json();
     })
     .then(function(data){
-        console.log(data)
+        //console.log(data)
         for(let i = 0; i < data.length; i++){
             //console.log(location.name+",", location.country);
             var newLocation = data[i].name+", "+ [data[i].country];
