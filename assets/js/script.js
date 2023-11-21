@@ -84,9 +84,12 @@ function displayWeather(cityName, weather, main, wind, sys){
 
 //Display 5 days forecasting
 function displayforecasting(data){
-
     //Create HTML elements for 5 days
     for(let i = 1; i < 6 ; i++){
+        //Remove if the element already exists
+        $(`#day${i}`).remove();
+
+        //Create new element
         let forecastingEl = `<div id="day${i}"></div>`;
         $(".fiveDayForecast").append(forecastingEl);
         $(`#day${i}`).addClass("col-2").addClass("forecastDay");
@@ -132,7 +135,10 @@ function displayforecasting(data){
     $(forecastingDay+'Temp').text(Math.ceil(data.list[i].main.temp)+ " °C");
     $(forecastingDay+"icon").attr("src", "http://openweathermap.org/img/wn/" +data.list[i].weather[0].icon+ "@2x.png");
     $(forecastingDay+'humidity').text(Math.ceil(data.list[i].main.humidity)+ "%");
+    $(forecastingDay+'humidity').prepend(`<i class="fa-solid fa-droplet"></i>`);
     $(forecastingDay+'wind').text(Math.ceil(data.list[i].wind.speed * 3.6) + " KPH");
+    $(forecastingDay+'wind').prepend(`<i class="fa-solid fa-wind"></i>`);
+    
 
     //Maybe find the average temp for that day
 

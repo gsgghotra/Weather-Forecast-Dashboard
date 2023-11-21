@@ -174,14 +174,21 @@ body{
     .icon{
         display: flex;
         margin: 0px auto;
+        -webkit-filter: drop-shadow(3px 3px 3px #858585);
+        filter: drop-shadow(3px 3px 3px #505050);
     }
-
-    .humidity{
+    .fa-solid::before{
+        padding-right: 8px;
+    }
+    .humidity, .wind{
         display: inline-block;
-        width: 50%;
+        width: 40%;
+        color: #444444;
+        text-align: center;
+        font-size: 14px;
     }
     .wind{
-        display: inline-block;
+        width: 60%;
     }
 }
 
