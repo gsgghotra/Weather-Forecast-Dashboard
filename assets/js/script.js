@@ -83,8 +83,25 @@ function displayWeather(cityName, weather, main, wind, sys){
 }
 
 //Display 5 days forecasting
-
 function displayforecasting(data){
+
+    //Create HTML elements for 5 days
+    for(let i = 1; i < 6 ; i++){
+        let forecastingEl = `<div id="day${i}"></div>`;
+        $(".fiveDayForecast").append(forecastingEl);
+        $(`#day${i}`).addClass("col-2").addClass("forecastDay");
+
+        //Add Heading to Daily forecast
+        let forecastHeading = `<h5 id="day${i}heading"></h5>`;
+        let forecastImage = `<img id="day${i}icon" class="icon"></img>`;
+        let forecastTemp = `<p id="day${i}Temp" class="temp"></p>`;
+        let forecastWind = `<p id="day${i}wind" class="wind"></p>`;
+        let forecastHumidity = `<p id="day${i}humidity" class="humidity"></p>`;
+
+        //Append the elements
+        $(`#day${i}`).append(forecastHeading).append(forecastImage).append(forecastTemp).append(forecastHumidity).append(forecastWind);
+    }
+
     const today = parseInt(dayjs().format('DD')); //Save it as a number
     let forecastingDay;
 
@@ -95,23 +112,23 @@ function displayforecasting(data){
 
     //check if that date is today + 1
     if(date-1 === today){
-        forecastingDay = '#dayOne';
+        forecastingDay = '#day1';
     }
     else if(date-2 === today){
-        forecastingDay = '#dayTwo';
+        forecastingDay = '#day2';
     }
     else if(date-3 === today){
-        forecastingDay = '#dayThree';
+        forecastingDay = '#day3';
     }
     else if(date-4 === today){
-        forecastingDay = '#dayFour';
+        forecastingDay = '#day4';
     }
     else if(date-5 === today){
-        forecastingDay = '#dayFive';
+        forecastingDay = '#day5';
     }
 
     //Create an element for date
-    $(forecastingDay+'heading').text(dayjs(data.list[i].dt_txt).format('DD/MM/YYYY'));
+    $(forecastingDay+'heading').text(dayjs(data.list[i].dt_txt).format('dddd, DD'));
     $(forecastingDay+'Temp').text(Math.ceil(data.list[i].main.temp)+ " °C");
     $(forecastingDay+"icon").attr("src", "http://openweathermap.org/img/wn/" +data.list[i].weather[0].icon+ "@2x.png");
     $(forecastingDay+'humidity').text(Math.ceil(data.list[i].main.humidity)+ "%");

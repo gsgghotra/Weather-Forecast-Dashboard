@@ -160,18 +160,34 @@ body{
     margin-top: 5px;
 }
 .forecastDay{
-    border: 1px solid grey;
-    border-radius: 20px;
+    /* border: 1px solid grey; */
+    border-radius: 15px;
     min-height: 100px;
+    background-color: #ffffff;
+    /* padding: 5px; */
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
     .temp{
         text-align: center;
         font-size: 24px;
+    }
+    .icon{
+        display: flex;
+        margin: 0px auto;
+    }
+
+    .humidity{
+        display: inline-block;
+        width: 50%;
+    }
+    .wind{
+        display: inline-block;
     }
 }
 
 .forecastDay h5{
     text-align: center;
     font-size: 16px;
-    padding-top: 5px;
+    padding-top: 15px;
+    color: rgb(83, 81, 81);
 }
