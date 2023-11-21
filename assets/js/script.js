@@ -84,6 +84,7 @@ function displayWeather(cityName, weather, main, wind, sys){
 
 //Display 5 days forecasting
 function displayforecasting(data){
+    console.log(data);
     //Create HTML elements for 5 days
     for(let i = 1; i < 6 ; i++){
         //Remove if the element already exists
@@ -98,11 +99,12 @@ function displayforecasting(data){
         let forecastHeading = `<h5 id="day${i}heading"></h5>`;
         let forecastImage = `<img id="day${i}icon" class="icon"></img>`;
         let forecastTemp = `<p id="day${i}Temp" class="temp"></p>`;
+        let forecastStatus = `<p id="day${i}Status" class="status"></p>`;
         let forecastWind = `<p id="day${i}wind" class="wind"></p>`;
         let forecastHumidity = `<p id="day${i}humidity" class="humidity"></p>`;
 
         //Append the elements
-        $(`#day${i}`).append(forecastHeading).append(forecastImage).append(forecastTemp).append(forecastHumidity).append(forecastWind);
+        $(`#day${i}`).append(forecastHeading).append(forecastImage).append(forecastTemp).append(forecastStatus).append(forecastHumidity).append(forecastWind);
     }
 
     const today = parseInt(dayjs().format('DD')); //Save it as a number
@@ -133,6 +135,7 @@ function displayforecasting(data){
     //Create an element for date
     $(forecastingDay+'heading').text(dayjs(data.list[i].dt_txt).format('dddd, DD'));
     $(forecastingDay+'Temp').text(Math.ceil(data.list[i].main.temp)+ " °C");
+    $(forecastingDay+'Status').text(data.list[i].weather[0].main);
     $(forecastingDay+"icon").attr("src", "http://openweathermap.org/img/wn/" +data.list[i].weather[0].icon+ "@2x.png");
     $(forecastingDay+'humidity').text(Math.ceil(data.list[i].main.humidity)+ "%");
     $(forecastingDay+'humidity').prepend(`<i class="fa-solid fa-droplet"></i>`);

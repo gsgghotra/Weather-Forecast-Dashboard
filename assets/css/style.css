@@ -111,11 +111,22 @@ body{
     }
 }
 /* Weather  */
-
+.currentLocation{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 15px;
+    width: 90%;
+    justify-content: center;
+    display: flex;
+    margin: 0px auto;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
 .currentWeather{
-    /* border: 1px solid black; */
     padding: 10px;
-    margin-top: 30px;
+    margin-top: 10px;
+}
+
+#searchedLocation{
+    padding-top: 15px;
 }
 
 #weatherStatus {
@@ -125,13 +136,17 @@ body{
     /* border: 1px solid red; */
 }
 
+#weather_image{
+    -webkit-filter: drop-shadow(3px 3px 3px #858585);
+    filter: drop-shadow(3px 3px 3px #505050);
+}
 .locationDescription{
     /* border: 1px solid green; */
-    padding: 10px;
+    /* padding: 10px; */
     display: grid;
     /* justify-content: normal; */
     align-items: center;
-    margin-top: 30px;
+    margin-top: -7px;
 }
 
 #temprature{
@@ -140,7 +155,9 @@ body{
 
 .descriptionHeading{
     font-size: 20px;
+    padding-bottom: 5px;
     margin: 0;
+    margin-top: 14px;
 }
 .descriptionText{
     margin-top: 2px;
@@ -157,19 +174,25 @@ body{
 }
 
 .forecastHeading{
-    margin-top: 5px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: #444444;
 }
 .forecastDay{
     /* border: 1px solid grey; */
     border-radius: 15px;
     min-height: 100px;
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
     /* padding: 5px; */
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
     .temp{
         text-align: center;
         font-size: 24px;
+    }
+    .status{
+        text-align: center;
+        color: #444444;
     }
     .icon{
         display: flex;
