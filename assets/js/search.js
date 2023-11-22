@@ -43,7 +43,7 @@ function autoCompleteGenerator(searchVal){
 
     //console.log(searchVal);
 
-    var url =  "http://api.openweathermap.org/geo/1.0/direct?q="+searchVal+"&limit=5&appid="+temp_token;
+    var url =  "https://api.openweathermap.org/geo/1.0/direct?q="+searchVal+"&limit=5&appid="+temp_token;
     fetch(url)
     .then(function(response){
         //console.log(response);
@@ -62,7 +62,7 @@ function autoCompleteGenerator(searchVal){
 }
 
 function manualGeoSearch(searchVal){
-    var url =  "http://api.openweathermap.org/geo/1.0/direct?q="+searchVal+"&limit=1&appid="+temp_token;
+    var url =  "https://api.openweathermap.org/geo/1.0/direct?q="+searchVal+"&limit=1&appid="+temp_token;
     fetch(url)
     .then(function(response){
         return response.json();

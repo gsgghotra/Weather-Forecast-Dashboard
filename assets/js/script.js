@@ -75,7 +75,7 @@ function displayWeather(cityName, weather, main, wind, sys, timezone){
 
     //Add temprature, weather icon 
     $('#temprature').text(Math.ceil(main.temp) + " °C")
-    $("#weather_image").attr("src", "http://openweathermap.org/img/wn/" +weather[0].icon+ "@2x.png");
+    $("#weather_image").attr("src", "https://openweathermap.org/img/wn/" +weather[0].icon+ "@2x.png");
 
     //More information section
     $('#humidity').text(main.humidity+"%");
@@ -147,7 +147,7 @@ function displayforecasting(data){
     $(forecastingDay+'heading').text(dayjs(data.list[i].dt_txt).format('dddd, DD'));
     $(forecastingDay+'Temp').text(averageTemp+ " °C");
     $(forecastingDay+'Status').text(weatherStatus);
-    $(forecastingDay+"icon").attr("src", "http://openweathermap.org/img/wn/" +weatherIcon+ "@2x.png");
+    $(forecastingDay+"icon").attr("src", "https://openweathermap.org/img/wn/" +weatherIcon+ "@2x.png");
     $(forecastingDay+'humidity').text(Math.ceil(data.list[i].main.humidity)+ "%");
     $(forecastingDay+'humidity').prepend(`<i class="fa-solid fa-droplet"></i>`);
     $(forecastingDay+'wind').text(Math.ceil(data.list[i].wind.speed * 3.6) + " KPH");
