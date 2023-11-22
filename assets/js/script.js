@@ -1,18 +1,15 @@
 //Today's Date 
 let timeNow = dayjs();
 let formattedDate = dayjs(timeNow).format('dddd, MMMM D');
-const halfNumber = "4ed3e1";
-const mixMatch = "bea4ef0388";
-const encrypt = "ded72698";
-const endCode = "1457aa53";
 
-let temp_token = halfNumber+mixMatch+encrypt+endCode;
 //Append the time to the page
 let todayEl = document.getElementById('todayDate');
 todayEl.innerText = formattedDate;
 
 //By deafult load London
-let queryURL = urlGenerator('weather','London', 51.509865, -0.118092);
+if(!isDefaultSet){
+    queryURL = urlGenerator('weather','London', 51.509865, -0.118092);
+}
 
 //The location will be used to get lon and lat cordinates
 function urlGenerator (requestType, cityName, latitude, longitude){

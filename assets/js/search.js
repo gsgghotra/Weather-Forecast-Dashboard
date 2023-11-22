@@ -4,13 +4,25 @@ let search=document.getElementById('search-input');
 let locallyStored = localStorage.getItem("searchList");
 //Converting stored array
 
+let queryURL;
 let searchedCities = [];
+let isDefaultSet = false;
+
+const halfNumber = "4ed3e1";
+const mixMatch = "bea4ef0388";
+const encrypt = "ded72698";
+const endCode = "1457aa53";
+
+let temp_token = halfNumber+mixMatch+encrypt+endCode;
 
 // Adding locally stored searched list into the arrays
 if (locallyStored){
     locallyStored = JSON.parse(locallyStored);
     searchedCities = [...locallyStored];
     updateSearchList();
+    isDefaultSet = true
+    manualGeoSearch(searchedCities[0]);
+    console.log(searchedCities[0] , " should be loaded.")
 } else {
     $('#historyHeading').hide();
 }
