@@ -113,7 +113,9 @@ $('#search-button').on('click', (event)=>{
     
     //add saerched Location the screen
     let searchedLocation = document.getElementById('searchedLocation');
-    manualGeoSearch(searchVal);
+    if(searchVal){
+        manualGeoSearch(searchVal);
+    }
 })
 
 
@@ -137,7 +139,6 @@ function updateSearchList(){
 
     //Remove more values than 5 from search history
     for (let i = 5; i < searchedCities.length; i++){
-        console.log("City should be rempoved",searchedCities[i]);
         searchedCities.splice([i],searchedCities.length);
     }
 
