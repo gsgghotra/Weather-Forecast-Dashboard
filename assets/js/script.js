@@ -87,6 +87,7 @@ function displayWeather(cityName, weather, main, wind, sys, timezone){
 
 //Display 5 days forecasting
 function displayforecasting(data){
+    console.log(data)
     //Create HTML elements for 5 days
     for(let i = 1; i < 6 ; i++){
         //Remove if the element already exists
@@ -101,16 +102,18 @@ function displayforecasting(data){
         let forecastHeading = `<h5 id="day${i}heading"></h5>`;
         let forecastImage = `<img id="day${i}icon" class="icon"></img>`;
         let forecastTemp = `<p id="day${i}Temp" class="temp"></p>`;
+        let forecastTempMax = `<div class="tempLabel">H: <p id="day${i}TempMax" class="tempMax"></p></div>`;
+        let forecastTempMin = `<div class="tempLabel">L: <p id="day${i}TempMin" class="tempMin"></p></div>`;
         let forecastStatus = `<p id="day${i}Status" class="status"></p>`;
         let forecastWind = `<p id="day${i}wind" class="wind"></p>`;
         let forecastHumidity = `<p id="day${i}humidity" class="humidity"></p>`;
 
         //Append the elements
-        $(`#day${i}`).append(forecastHeading).append(forecastImage).append(forecastTemp).append(forecastStatus).append(forecastHumidity).append(forecastWind);
+        $(`#day${i}`).append(forecastHeading).append(forecastImage).append(forecastTemp).append(forecastTempMin).append(forecastTempMax).append(forecastStatus).append(forecastHumidity).append(forecastWind);
     }
 
     const today = parseInt(dayjs().format('DD')); //Save it as a number
-    let forecastingDay, weatherIcon, weatherStatus, averageTemp;
+    let forecastingDay, weatherIcon, weatherStatus, averageTemp, tempMax = [], tempMin = [];
 
     for(let i = 0; i < data.list.length; i++){
         let date = parseInt(dayjs(data.list[i].dt_txt).format('DD')); //Save it as a number
@@ -134,24 +137,37 @@ function displayforecasting(data){
     //check the forcasting date with dayJs diff method
     if(dayDiff === 1){
         forecastingDay = '#day1';
+        tempMax.push(Math.round(data.list[i].main.temp_max));
+        tempMin.push(Math.round(data.list[i].main.temp_min));
+        //console.log("Day 1: ", Math.max(...tempMax))
     }
     else if(dayDiff === 2){
         forecastingDay = '#day2';
+        tempMax.push(Math.round(data.list[i].main.temp_max));
+        tempMin.push(Math.round(data.list[i].main.temp_min));
     }
     else if(dayDiff === 3){
         forecastingDay = '#day3';
+        tempMax.push(Math.round(data.list[i].main.temp_max));
+        tempMin.push(Math.round(data.list[i].main.temp_min));
     }
     else if(dayDiff === 4){
         forecastingDay = '#day4';
+        tempMax.push(Math.round(data.list[i].main.temp_max));
+        tempMin.push(Math.round(data.list[i].main.temp_min));
     }
     else if(dayDiff === 5){
         forecastingDay = '#day5';
+        tempMax.push(Math.round(data.list[i].main.temp_max));
+        tempMin.push(Math.round(data.list[i].main.temp_min));
     }
 
     //Create an element for date
     
     $(forecastingDay+'heading').text(dayjs(data.list[i].dt_txt).format('dddd, DD'));
     $(forecastingDay+'Temp').text(averageTemp+ " °C");
+    $(forecastingDay+'TempMax').text(Math.max(...tempMax) + " °C");
+    $(forecastingDay+'TempMin').text(Math.min(...tempMin) + " °C");
     $(forecastingDay+'Status').text(weatherStatus);
     $(forecastingDay+"icon").attr("src", "https://openweathermap.org/img/wn/" +weatherIcon+ "@2x.png");
     $(forecastingDay+'humidity').text(Math.ceil(data.list[i].main.humidity)+ "%");
