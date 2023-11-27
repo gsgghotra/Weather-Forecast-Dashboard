@@ -125,7 +125,7 @@ function displayforecasting(data){
     if (dayjs(data.list[i].dt_txt).format('HH') === '12'){
         weatherIcon =  data.list[i].weather[0].icon;
         weatherStatus = data.list[i].weather[0].main;
-        averageTemp = Math.ceil(data.list[i].main.temp);
+        averageTemp = Math.round(data.list[i].main.temp);
     }
     // Find day diff
     let futureDate = dayjs(data.list[i].dt_txt).format('YYYY-MM-DD');
