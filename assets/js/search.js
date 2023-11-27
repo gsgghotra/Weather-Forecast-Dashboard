@@ -22,7 +22,7 @@ if (locallyStored){
     updateSearchList();
     isDefaultSet = true
     manualGeoSearch(searchedCities[0]);
-    console.log(searchedCities[0] , " should be loaded.")
+    //console.log(searchedCities[0] , " should be loaded.")
 } else {
     $('#historyHeading').hide();
 }

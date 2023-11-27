@@ -8,7 +8,7 @@ A weather dashboard that shows the current weather status for the searched city 
 
 1. [Introduction](#introduction)
 2. [Screenshots](#screenshots)
-4. [Contact Information](#contact-information)
+3. [Contact Information](#contact-information)
 
 ## Introduction
 

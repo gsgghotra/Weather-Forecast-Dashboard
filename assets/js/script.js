@@ -112,7 +112,7 @@ function displayforecasting(data){
     const today = parseInt(dayjs().format('DD')); //Save it as a number
     let forecastingDay, weatherIcon, weatherStatus, averageTemp;
 
-    for(let i = 0; i < data.cnt; i++){
+    for(let i = 0; i < data.list.length; i++){
         let date = parseInt(dayjs(data.list[i].dt_txt).format('DD')); //Save it as a number
 
         
@@ -122,25 +122,34 @@ function displayforecasting(data){
         weatherStatus = data.list[i].weather[0].main;
         averageTemp = Math.ceil(data.list[i].main.temp);
     }
+    // Find day diff
+    let futureDate = dayjs(data.list[i].dt_txt).format('YYYY-MM-DD');
+    let curDate = dayjs().format('YYYY-MM-DD')
+    const dateForecast = dayjs(futureDate)
+    const dateToday = dayjs(curDate)
+    let dayDiff = dateForecast.diff(dateToday ,'day')
+    // console.log(dayDiff)
 
-    //check if that date is today + 1
-    if(date-1 === today){
+
+    //check the forcasting date with dayJs diff method
+    if(dayDiff === 1){
         forecastingDay = '#day1';
     }
-    else if(date-2 === today){
+    else if(dayDiff === 2){
         forecastingDay = '#day2';
     }
-    else if(date-3 === today){
+    else if(dayDiff === 3){
         forecastingDay = '#day3';
     }
-    else if(date-4 === today){
+    else if(dayDiff === 4){
         forecastingDay = '#day4';
     }
-    else if(date-5 === today){
+    else if(dayDiff === 5){
         forecastingDay = '#day5';
     }
 
     //Create an element for date
+    
     $(forecastingDay+'heading').text(dayjs(data.list[i].dt_txt).format('dddd, DD'));
     $(forecastingDay+'Temp').text(averageTemp+ " °C");
     $(forecastingDay+'Status').text(weatherStatus);
@@ -149,10 +158,5 @@ function displayforecasting(data){
     $(forecastingDay+'humidity').prepend(`<i class="fa-solid fa-droplet"></i>`);
     $(forecastingDay+'wind').text(Math.ceil(data.list[i].wind.speed * 3.6) + " KPH");
     $(forecastingDay+'wind').prepend(`<i class="fa-solid fa-wind"></i>`);
-    
-
-    //Maybe find the average temp for that day
-
-    //
     }
 }
