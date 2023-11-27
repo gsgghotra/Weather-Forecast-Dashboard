@@ -113,7 +113,9 @@ function displayforecasting(data){
     }
 
     const today = parseInt(dayjs().format('DD')); //Save it as a number
-    let forecastingDay, weatherIcon, weatherStatus, averageTemp, tempMax = [], tempMin = [];
+    let forecastingDay, weatherIcon, weatherStatus, averageTemp;
+    let tempMax1 = [], tempMax2 = [], tempMax3 = [], tempMax4 = [], tempMax5 = []
+    let tempMin1 = [], tempMin2 = [], tempMin3 = [], tempMin4 = [], tempMin5 = []
 
     for(let i = 0; i < data.list.length; i++){
         let date = parseInt(dayjs(data.list[i].dt_txt).format('DD')); //Save it as a number
@@ -137,37 +139,49 @@ function displayforecasting(data){
     //check the forcasting date with dayJs diff method
     if(dayDiff === 1){
         forecastingDay = '#day1';
-        tempMax.push(Math.round(data.list[i].main.temp_max));
-        tempMin.push(Math.round(data.list[i].main.temp_min));
-        //console.log("Day 1: ", Math.max(...tempMax))
+        tempMax1.push(Math.round(data.list[i].main.temp_max));
+        tempMin1.push(Math.round(data.list[i].main.temp_min));
+
+        $(forecastingDay+'TempMax').text(Math.max(...tempMax1) + " °C");
+        $(forecastingDay+'TempMin').text(Math.min(...tempMin1) + " °C");
     }
     else if(dayDiff === 2){
         forecastingDay = '#day2';
-        tempMax.push(Math.round(data.list[i].main.temp_max));
-        tempMin.push(Math.round(data.list[i].main.temp_min));
+        tempMax2.push(Math.round(data.list[i].main.temp_max));
+        tempMin2.push(Math.round(data.list[i].main.temp_min));
+
+        $(forecastingDay+'TempMax').text(Math.max(...tempMax2) + " °C");
+        $(forecastingDay+'TempMin').text(Math.min(...tempMin2) + " °C");
     }
     else if(dayDiff === 3){
         forecastingDay = '#day3';
-        tempMax.push(Math.round(data.list[i].main.temp_max));
-        tempMin.push(Math.round(data.list[i].main.temp_min));
+        tempMax3.push(Math.round(data.list[i].main.temp_max));
+        tempMin3.push(Math.round(data.list[i].main.temp_min));
+
+        $(forecastingDay+'TempMax').text(Math.max(...tempMax3) + " °C");
+        $(forecastingDay+'TempMin').text(Math.min(...tempMin3) + " °C");
     }
     else if(dayDiff === 4){
         forecastingDay = '#day4';
-        tempMax.push(Math.round(data.list[i].main.temp_max));
-        tempMin.push(Math.round(data.list[i].main.temp_min));
+        tempMax4.push(Math.round(data.list[i].main.temp_max));
+        tempMin4.push(Math.round(data.list[i].main.temp_min));
+
+        $(forecastingDay+'TempMax').text(Math.max(...tempMax4) + " °C");
+        $(forecastingDay+'TempMin').text(Math.min(...tempMin4) + " °C");
     }
     else if(dayDiff === 5){
         forecastingDay = '#day5';
-        tempMax.push(Math.round(data.list[i].main.temp_max));
-        tempMin.push(Math.round(data.list[i].main.temp_min));
+        tempMax5.push(Math.round(data.list[i].main.temp_max));
+        tempMin5.push(Math.round(data.list[i].main.temp_min));
+
+        $(forecastingDay+'TempMax').text(Math.max(...tempMax5) + " °C");
+        $(forecastingDay+'TempMin').text(Math.min(...tempMin5) + " °C");
     }
 
     //Create an element for date
     
     $(forecastingDay+'heading').text(dayjs(data.list[i].dt_txt).format('dddd, DD'));
     $(forecastingDay+'Temp').text(averageTemp+ " °C");
-    $(forecastingDay+'TempMax').text(Math.max(...tempMax) + " °C");
-    $(forecastingDay+'TempMin').text(Math.min(...tempMin) + " °C");
     $(forecastingDay+'Status').text(weatherStatus);
     $(forecastingDay+"icon").attr("src", "https://openweathermap.org/img/wn/" +weatherIcon+ "@2x.png");
     $(forecastingDay+'humidity').text(Math.ceil(data.list[i].main.humidity)+ "%");

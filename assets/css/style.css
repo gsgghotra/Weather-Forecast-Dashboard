@@ -188,9 +188,11 @@ body{
     color: #444444;
 }
 .forecastDay{
+    min-width: 160px;
     border-radius: 15px;
     min-height: 100px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    margin-bottom: 25px;
 
     .temp{
         text-align: center;
